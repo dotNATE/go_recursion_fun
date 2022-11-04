@@ -3,5 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("This runs")
+	myHolding := newHolding("Ethical Global Fund", 1)
+
+	fmt.Printf("My Holding: %+v", myHolding)
 }

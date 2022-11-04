@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -19,6 +20,23 @@ func newFund(n string, h []holding) fund {
 		Name:     n,
 		Holdings: h,
 	}
+}
+
+func newFundFromFile(filename string) fund {
+	bs, err := os.ReadFile("fundData/" + filename)
+	if err != nil {
+		fmt.Println("Error reading fund from file: ", err)
+		os.Exit(1)
+	}
+
+	fund := fund{}
+	err = json.Unmarshal(bs, &fund)
+	if err != nil {
+		fmt.Println("Error unmarshalling fund: ", err)
+		os.Exit(1)
+	}
+
+	return fund
 }
 
 func (f fund) writeToFile(filename string) error {

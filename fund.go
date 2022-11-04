@@ -11,8 +11,19 @@ type fund struct {
 	Holdings []holding `json:"holdings"`
 }
 
-type fundData struct {
-	FundData []fund `json:"fundData"`
+func getFundDataFromDir() []fund {
+	files, err := os.ReadDir("fundData")
+	if err != nil {
+		fmt.Println("Error reading fund directory: ", err)
+		os.Exit(1)
+	}
+
+	var fundData []fund
+	for _, file := range files {
+		fundData = append(fundData, newFundFromFile(file.Name()))
+	}
+
+	return fundData
 }
 
 func newFund(n string, h []holding) fund {

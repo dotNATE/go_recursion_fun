@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fund := newFundFromFile("ethicalGlobalFund.json")
+	fundData := getFundDataFromDir()
 
-	fmt.Printf("fund: %+v", fund)
+	fmt.Printf("fund data: %+v\n", fundData)
 }

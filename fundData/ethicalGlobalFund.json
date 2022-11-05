@@ -1,0 +1,21 @@
+{
+ "name": "Ethical Global Fund",
+ "holdings": [
+  {
+   "name": "Fund B",
+   "weight": 0.2
+  },
+  {
+   "name": "Fund C",
+   "weight": 0.5
+  },
+  {
+   "name": "Fund D",
+   "weight": 0.15
+  },
+  {
+   "name": "GrapeCo",
+   "weight": 0.15
+  }
+ ]
+}

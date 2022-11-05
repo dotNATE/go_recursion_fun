@@ -1,0 +1,13 @@
+{
+ "name": "Fund E",
+ "holdings": [
+  {
+   "name": "GrapeCo",
+   "weight": 0.2
+  },
+  {
+   "name": "SolarCorp",
+   "weight": 0.8
+  }
+ ]
+}

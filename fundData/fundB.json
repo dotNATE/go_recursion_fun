@@ -1,0 +1,17 @@
+{
+ "name": "Fund B",
+ "holdings": [
+  {
+   "name": "MicroFit",
+   "weight": 0.5
+  },
+  {
+   "name": "GreenCo",
+   "weight": 0.3
+  },
+  {
+   "name": "GrapeCo",
+   "weight": 0.2
+  }
+ ]
+}

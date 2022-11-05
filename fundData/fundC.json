@@ -1,0 +1,17 @@
+{
+ "name": "Fund C",
+ "holdings": [
+  {
+   "name": "Fund D",
+   "weight": 0.4
+  },
+  {
+   "name": "GrapeCo",
+   "weight": 0.3
+  },
+  {
+   "name": "GoldenGadgets",
+   "weight": 0.3
+  }
+ ]
+}

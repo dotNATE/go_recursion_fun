@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	myHolding := newHolding("Ethical Global Fund", 1)
+	myHolding := NewHolding("Ethical Global Fund", 1)
 	fundData := GetFundDataFromDir()
 
 	myCompanies := extractCompaniesFromFundDataRecursively(fundData, myHolding)

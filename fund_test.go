@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	m "recursive_data_fun"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_NewFund(t *testing.T) {
@@ -17,14 +17,9 @@ func Test_NewFund(t *testing.T) {
 		},
 	}
 
-	expected := m.Fund{
-		Name:     "Fund Test",
-		Holdings: holdings,
-	}
-
 	result := m.NewFund("Fund Test", holdings)
 
-	assert.Equal(t, expected, result)
+	assert.IsType(t, m.Fund{}, result)
 }
 
 func Test_WriteToFileAndNewFundFromFile(t *testing.T) {

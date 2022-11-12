@@ -14,7 +14,7 @@ func findHoldingInSlice(s []Holding, x string) int {
 	return -1
 }
 
-func newHolding(n string, w float32) Holding {
+func NewHolding(n string, w float32) Holding {
 	return Holding{
 		Name:   n,
 		Weight: w,

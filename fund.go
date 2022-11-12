@@ -28,7 +28,7 @@ func extractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding)
 				}
 
 				for _, newCompany := range newCompanies {
-					i := findHoldingInSlice(weightedCompanies, newCompany.Name)
+					i := FindHoldingInSlice(weightedCompanies, newCompany.Name)
 
 					if i > -1 {
 						weightedCompanies[i].Weight += newCompany.Weight

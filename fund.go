@@ -12,7 +12,7 @@ type Fund struct {
 	Holdings []Holding `json:"holdings"`
 }
 
-func extractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding) []Holding {
+func ExtractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding) []Holding {
 	var weightedCompanies []Holding
 
 	for _, fund := range fundData {
@@ -22,7 +22,7 @@ func extractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding)
 				var newCompanies []Holding
 
 				if strings.HasPrefix(h.Name, "Fund") {
-					newCompanies = extractCompaniesFromFundDataRecursively(fundData, h)
+					newCompanies = ExtractCompaniesFromFundDataRecursively(fundData, h)
 				} else {
 					newCompanies = append(newCompanies, h)
 				}

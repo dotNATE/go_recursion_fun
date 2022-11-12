@@ -6,7 +6,7 @@ func main() {
 	myHolding := NewHolding("Ethical Global Fund", 1)
 	fundData := GetFundDataFromDir()
 
-	myCompanies := extractCompaniesFromFundDataRecursively(fundData, myHolding)
+	myCompanies := ExtractCompaniesFromFundDataRecursively(fundData, myHolding)
 	var totalWeight float32
 
 	fmt.Print("Your holdings:\n\n")

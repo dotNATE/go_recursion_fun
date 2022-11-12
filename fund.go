@@ -43,7 +43,7 @@ func extractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding)
 	return weightedCompanies
 }
 
-func getFundDataFromDir() []Fund {
+func GetFundDataFromDir() []Fund {
 	files, err := os.ReadDir("fundData")
 	if err != nil {
 		fmt.Println("Error reading fund directory: ", err)

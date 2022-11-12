@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	myHolding := newHolding("Ethical Global Fund", 1)
-	fundData := getFundDataFromDir()
+	fundData := GetFundDataFromDir()
 
 	myCompanies := extractCompaniesFromFundDataRecursively(fundData, myHolding)
 	var totalWeight float32

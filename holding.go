@@ -5,7 +5,7 @@ type holding struct {
 	Weight float32 `json:"weight"`
 }
 
-func FindHoldingInSlice(s []holding, x string) int {
+func findHoldingInSlice(s []holding, x string) int {
 	for i, n := range s {
 		if n.Name == x {
 			return i

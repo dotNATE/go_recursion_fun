@@ -12,6 +12,37 @@ type fund struct {
 	Holdings []holding `json:"holdings"`
 }
 
+func extractCompaniesFromFundDataRecursively(fundData []fund, myHolding holding) []holding {
+	var weightedCompanies []holding
+
+	for _, fund := range fundData {
+		if fund.Name == myHolding.Name {
+			for _, h := range fund.Holdings {
+				h.Weight *= myHolding.Weight
+				var newCompanies []holding
+
+				if strings.HasPrefix(h.Name, "Fund") {
+					newCompanies = extractCompaniesFromFundDataRecursively(fundData, h)
+				} else {
+					newCompanies = append(newCompanies, h)
+				}
+
+				for _, newCompany := range newCompanies {
+					i := findHoldingInSlice(weightedCompanies, newCompany.Name)
+
+					if i > -1 {
+						weightedCompanies[i].Weight += newCompany.Weight
+					} else {
+						weightedCompanies = append(weightedCompanies, newCompany)
+					}
+				}
+			}
+		}
+	}
+
+	return weightedCompanies
+}
+
 func getFundDataFromDir() []fund {
 	files, err := os.ReadDir("fundData")
 	if err != nil {
@@ -55,35 +86,4 @@ func (f fund) writeToFile(filename string) error {
 	file, _ := json.MarshalIndent(f, "", " ")
 
 	return os.WriteFile("fundData/"+filename, file, 0644)
-}
-
-func extractCompaniesFromFundDataRecursively(fundData []fund, myHolding holding) []holding {
-	var weightedCompanies []holding
-
-	for _, fund := range fundData {
-		if fund.Name == myHolding.Name {
-			for _, h := range fund.Holdings {
-				h.Weight *= myHolding.Weight
-				var newCompanies []holding
-
-				if strings.HasPrefix(h.Name, "Fund") {
-					newCompanies = extractCompaniesFromFundDataRecursively(fundData, h)
-				} else {
-					newCompanies = append(newCompanies, h)
-				}
-
-				for _, newCompany := range newCompanies {
-					i := FindHoldingInSlice(weightedCompanies, newCompany.Name)
-
-					if i > -1 {
-						weightedCompanies[i].Weight += newCompany.Weight
-					} else {
-						weightedCompanies = append(weightedCompanies, newCompany)
-					}
-				}
-			}
-		}
-	}
-
-	return weightedCompanies
 }

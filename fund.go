@@ -52,7 +52,7 @@ func getFundDataFromDir() []Fund {
 
 	var fundData []Fund
 	for _, file := range files {
-		fundData = append(fundData, newFundFromFile(file.Name()))
+		fundData = append(fundData, NewFundFromFile(file.Name()))
 	}
 
 	return fundData
@@ -65,7 +65,7 @@ func NewFund(n string, h []Holding) Fund {
 	}
 }
 
-func newFundFromFile(filename string) Fund {
+func NewFundFromFile(filename string) Fund {
 	bs, err := os.ReadFile("fundData/" + filename)
 	if err != nil {
 		fmt.Println("Error reading fund from file: ", err)
@@ -82,7 +82,7 @@ func newFundFromFile(filename string) Fund {
 	return fund
 }
 
-func (f Fund) writeToFile(filename string) error {
+func (f Fund) WriteToFile(filename string) error {
 	file, _ := json.MarshalIndent(f, "", " ")
 
 	return os.WriteFile("fundData/"+filename, file, 0644)

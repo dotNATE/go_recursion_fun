@@ -7,19 +7,19 @@ import (
 	"strings"
 )
 
-type fund struct {
+type Fund struct {
 	Name     string    `json:"name"`
-	Holdings []holding `json:"holdings"`
+	Holdings []Holding `json:"holdings"`
 }
 
-func extractCompaniesFromFundDataRecursively(fundData []fund, myHolding holding) []holding {
-	var weightedCompanies []holding
+func extractCompaniesFromFundDataRecursively(fundData []Fund, myHolding Holding) []Holding {
+	var weightedCompanies []Holding
 
 	for _, fund := range fundData {
 		if fund.Name == myHolding.Name {
 			for _, h := range fund.Holdings {
 				h.Weight *= myHolding.Weight
-				var newCompanies []holding
+				var newCompanies []Holding
 
 				if strings.HasPrefix(h.Name, "Fund") {
 					newCompanies = extractCompaniesFromFundDataRecursively(fundData, h)
@@ -43,14 +43,14 @@ func extractCompaniesFromFundDataRecursively(fundData []fund, myHolding holding)
 	return weightedCompanies
 }
 
-func getFundDataFromDir() []fund {
+func getFundDataFromDir() []Fund {
 	files, err := os.ReadDir("fundData")
 	if err != nil {
 		fmt.Println("Error reading fund directory: ", err)
 		os.Exit(1)
 	}
 
-	var fundData []fund
+	var fundData []Fund
 	for _, file := range files {
 		fundData = append(fundData, newFundFromFile(file.Name()))
 	}
@@ -58,21 +58,21 @@ func getFundDataFromDir() []fund {
 	return fundData
 }
 
-func newFund(n string, h []holding) fund {
-	return fund{
+func NewFund(n string, h []Holding) Fund {
+	return Fund{
 		Name:     n,
 		Holdings: h,
 	}
 }
 
-func newFundFromFile(filename string) fund {
+func newFundFromFile(filename string) Fund {
 	bs, err := os.ReadFile("fundData/" + filename)
 	if err != nil {
 		fmt.Println("Error reading fund from file: ", err)
 		os.Exit(1)
 	}
 
-	fund := fund{}
+	fund := Fund{}
 	err = json.Unmarshal(bs, &fund)
 	if err != nil {
 		fmt.Println("Error unmarshalling fund: ", err)
@@ -82,7 +82,7 @@ func newFundFromFile(filename string) fund {
 	return fund
 }
 
-func (f fund) writeToFile(filename string) error {
+func (f Fund) writeToFile(filename string) error {
 	file, _ := json.MarshalIndent(f, "", " ")
 
 	return os.WriteFile("fundData/"+filename, file, 0644)
